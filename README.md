@@ -11,12 +11,12 @@ https://cdn.rawgit.com/BOXNYC/jquery-bootstrap-affix-dynamic/master/jQuery.boots
 
 ###Selector (Incomplete. TO DO: OPTIONS)
 ```
-  $(function(){
-		$('#my-element').affixDynamic({
-		  offsetTop: '#navbar',
-		  offsetBottom: '#footer'
-		});
+$(function(){
+	$('#my-element').affixDynamic({
+	  offsetTop: '#navbar',
+	  offsetBottom: '#footer'
 	});
+});
 ```
 ###Inline Auto init (Bootstrap syntax)
 ```
