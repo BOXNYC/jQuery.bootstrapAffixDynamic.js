@@ -13,7 +13,7 @@ https://cdn.rawgit.com/BOXNYC/jquery-bootstrap-affix-dynamic/master/jQuery.boots
 ```
   $(function(){
 		$('#my-element').affixDynamic({
-	    offsetTop: '#navbar',
+		  offsetTop: '#navbar',
 		  offsetBottom: '#footer'
 		});
 	});
