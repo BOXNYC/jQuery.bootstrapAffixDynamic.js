@@ -9,7 +9,7 @@ https://cdn.rawgit.com/BOXNYC/jquery-bootstrap-affix-dynamic/master/jQuery.boots
 
 ##USEAGE
 
-###Selector *(Incomplete. TO DO: OPTIONS)*
+###Selector *(TO DO: OPTIONS)*
 ```
 $(function(){
 	$('#my-element').affixDynamic({
@@ -19,7 +19,7 @@ $(function(){
 	});
 });
 ```
-###Inline Auto init (Bootstrap syntax)
+###Inline-auto-init (Bootstrap syntax) *(TO DO: data-device-sizes)*
 ```
 <div data-spy="affix-dynamic" data-offset-top="#navbar" data-offset-bottom="#footer" data-device-sizes="sm md lg">
 	content...
