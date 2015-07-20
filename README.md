@@ -13,15 +13,15 @@ https://cdn.rawgit.com/BOXNYC/jquery-bootstrap-affix-dynamic/master/jQuery.boots
 ```
 $(function(){
 	$('#my-element').affixDynamic({
-		offsetTop: '#navbar',
-		offsetBottom: '#footer',
-		deviceSizes: 'sm md lg'
+		offsetTop: '#navbar', // Selectors only
+		offsetBottom: '#footer', // Selectors only
+		deviceSizes: 'sm md lg' // Doesn't do anything if changed
 	});
 });
 ```
 ###Inline-auto-init (Bootstrap syntax) *(TO DO: data-device-sizes)*
 ```
-<div data-spy="affix-dynamic" data-offset-top="#navbar" data-offset-bottom="#footer" data-device-sizes="sm md lg">
+<div data-spy="affix-dynamic" data-offset-top="#navbar" data-offset-bottom="#footer" data-device-sizes="sm md lg (Doesn't do anything)">
 	content...
 </div>
 ```
@@ -32,5 +32,5 @@ $(function(){
   * Device size not complete. Defaults to 'sm md lg' which is everything but 'xs'
   * Doesn't Handle integer values like affix uses by default.
   * Doesn't handle inline attr device size option.
-* **0.2** Coming soon
+
 
