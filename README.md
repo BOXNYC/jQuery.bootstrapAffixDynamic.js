@@ -26,6 +26,22 @@ $(function(){
 </div>
 ```
 
+###When using Drupal 7, add this behavior so AJAX events trigger updates
+```
+/**
+  * AffixDynamic behavior
+  */ 
+(function($, UND){
+	Drupal.behaviors.affixDynamic = {
+		attach: function(context, settings){
+			if(typeof $.affixDynamicUpdate === UND) return;
+			$.affixDynamicUpdate();
+		}
+	};
+})(jQuery, 'undefined');
+```
+
+
 #### Versions
 * **0.1**
   * Manual usage {options} not complete.
