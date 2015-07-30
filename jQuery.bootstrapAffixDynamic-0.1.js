@@ -1,5 +1,13 @@
 (function($, UND){
 	
+	$.fn.totalOuterHeight = function(){
+		var total = 0;
+		$(this).each(function(){
+			total += $(this).outerHeight();
+		});
+		return total;
+	};
+	
 	$.fn.affixDynamic = function(options){
 		return $(this).each(function(index){
 			// Vars
@@ -9,14 +17,14 @@
 					$dataOffsetTop = isNaN(dataOffsetTop) ? $(dataOffsetTop) : [],
 					$dataOffsetBottom = isNaN(dataOffsetBottom) ? $(dataOffsetBottom) : [],
 			    top = 0, bottom = 0, offset = {}, previousTop = 0,
-			    initTop = $this.offset().top,
+			    initTop = Math.round($this.offset().top),
 			    $CSS = $('<style type="text/css">').appendTo('head');
 			// On window resize, update our dynamic values
 			$(window).bind('resize.affixDynamic'+index, function(){
 				top = UND(dataOffsetTop) || !$dataOffsetTop.length ?
 					0 : $dataOffsetTop.outerHeight();
 		    bottom = UND(dataOffsetBottom) || !$dataOffsetBottom.length ?
-			    0 : $dataOffsetBottom.outerHeight() - initTop;
+			    0 : $dataOffsetBottom.totalOuterHeight() - initTop;
 		    if(top && top != previousTop) {
 			    var css = 'position:fixed !important;top:'+top+'px;';
 			    css = '[data-spy="affix-dynamic"].affix.affix-'+index+':not(.affix-bottom){' + css + '}';
@@ -26,7 +34,7 @@
 			  };
 			}).trigger('resize.affixDynamic'+index);
 			// Apply bootstrap affix
-			if(top) offset.top = function(){ return top; };
+			if(top) offset.top = function(){ return initTop > top ? initTop - top : top; };
 			if(bottom) offset.bottom = function(){ return bottom; };
 			$this.affix({
 			  offset: offset
