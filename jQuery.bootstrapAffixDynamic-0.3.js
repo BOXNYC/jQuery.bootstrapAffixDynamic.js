@@ -12,6 +12,7 @@
 		return $(this).each(function(index){
 			// Vars
 			var $this = $(this).addClass('affix-'+index),
+					$window = $(window),
 					dataOffsetTop = $this.attr('data-offset-top'),
 					dataOffsetBottom = $this.attr('data-offset-bottom'),
 					$dataOffsetTop = isNaN(dataOffsetTop) ? $(dataOffsetTop) : [],
@@ -20,7 +21,7 @@
 			    initTop = Math.round($this.offset().top),
 			    $CSS = $('<style type="text/css">').appendTo('head');
 			// On window resize, update our dynamic values
-			$(window).bind('resize.affixDynamic'+index, function(){
+			$window.bind('resize.affixDynamic'+index, function(){
 				top = UND(dataOffsetTop) || !$dataOffsetTop.length ?
 					0 : $dataOffsetTop.outerHeight();
 		    bottom = UND(dataOffsetBottom) || !$dataOffsetBottom.length ?
@@ -42,6 +43,9 @@
 			// Save creations for removal
 			$this.data('affixDynamic', {
 				$CSS: $CSS,
+				update: function(){
+					$window.trigger('resize.affixDynamic'+index);
+				}
 			});
 		});
 	};
@@ -54,6 +58,14 @@
 				data.$CSS.remove();
 				$(window).unbind('resize.affixDynamic'+index);
 			};
+		});
+	};
+	
+	$.affixDynamicUpdate = function(){
+		$('[data-spy="affix-dynamic"]').each(function(){
+			var $this = $(this),
+					data = $this.data('affixDynamic');
+			if(!UND(data)) data.update();
 		});
 	};
 	
