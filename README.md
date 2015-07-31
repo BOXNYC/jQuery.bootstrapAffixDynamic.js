@@ -4,9 +4,9 @@ Using bootstrap's affix js plugin, affix-dynamic works the same but supports jQu
 
 ##CDN
 
-####Production
+*Production*
 https://cdn.rawgit.com/BOXNYC/jquery-bootstrap-affix-dynamic/master/jQuery.bootstrapAffixDynamic-0.5.js
-####Minimized
+*Minimized*
 https://cdn.rawgit.com/BOXNYC/jquery-bootstrap-affix-dynamic/master/jQuery.bootstrapAffixDynamic-0.5.min.js
 
 
