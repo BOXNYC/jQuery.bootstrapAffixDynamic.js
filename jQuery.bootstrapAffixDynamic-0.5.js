@@ -13,7 +13,7 @@
 			options = $.extend({
 				offsetTop: 0,
 				offsetBottom: 0,
-				deviceSizes: 'sm'
+				deviceSizes: 'sm md lg'
 			}, options);
 			var $this = $(this),
 					dataOffsetTop = $this.attr('data-offset-top'),
