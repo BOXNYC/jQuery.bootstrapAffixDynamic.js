@@ -13,21 +13,27 @@
 			options = $.extend({
 				offsetTop: 0,
 				offsetBottom: 0,
-				deviceSizes: 'sm md lg'
+				deviceSizes: 'sm md lg',
+				paddingTop: 0,
+				paddingBottom: 30
 			}, options);
 			var $this = $(this),
 					dataOffsetTop = $this.attr('data-offset-top'),
 					dataOffsetBottom = $this.attr('data-offset-bottom'),
-					dataDeviceSizes = $this.attr('data-device-sizes');
+					dataDeviceSizes = $this.attr('data-device-sizes'),
+					dataPaddingTop = $this.attr('data-padding-top'),
+					dataPaddingBottom = $this.attr('data-padding-bottom');
 			if($this.hasClass('affix-'+index)) return true;
 			$this.addClass('affix-'+index);
-			// Handle data attributes
+			// Handle data attributes, apply em to options
 			if(isNaN(options.offsetTop)) options.offsetTop = $(options.offsetTop);
 			if(isNaN(options.offsetBottom)) options.offsetBottom = $(options.offsetBottom);
 			if(!UND(dataOffsetTop))
 				options.offsetTop = isNaN(dataOffsetTop) ? $(dataOffsetTop) : parseInt(dataOffsetTop);
 			if(!UND(dataOffsetBottom))
 				options.offsetBottom = isNaN(dataOffsetBottom) ? $(dataOffsetBottom) : parseInt(dataOffsetBottom);
+			if(!UND(dataPaddingTop)) options.paddingTop = parseInt(dataPaddingTop);
+			if(!UND(dataPaddingBottom)) options.paddingBottom = parseInt(dataPaddingBottom);
 			// Handle devide sizes
 			if(!UND(dataDeviceSizes)) options.deviceSizes = dataDeviceSizes;
 			var $window = $(window),
@@ -52,6 +58,8 @@
 			$window.bind('resize.affixDynamic'+index, function(){
 				top = isNaN(options.offsetTop) ? options.offsetTop.totalOuterHeight() : options.offsetTop;
 		    bottom = isNaN(options.offsetBottom) ? options.offsetBottom.totalOuterHeight() : options.offsetBottom;
+		    if(options.paddingTop) top += options.paddingTop;
+		    if(options.paddingBottom) bottom += options.paddingBottom;
 		    if(top && top != previousTop) {
 			    var css = 'position:fixed !important; top:'+top+'px;';
 			    css = '[data-spy="affix-dynamic"].affix.affix-'+index+':not(.affix-bottom){' + css + '}';
@@ -64,7 +72,7 @@
 			// Apply bootstrap affix
 			var offset = {};
 			if(top) offset.top = function(){ return initTop > top ? initTop - top : top; };
-			if(bottom) offset.bottom = function(){ return bottom; };
+			if(bottom) offset.bottom = function(){ return bottom - initTop; };
 			$this.affix({
 			  offset: offset
 			});
